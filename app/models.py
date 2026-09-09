@@ -9,7 +9,7 @@ class Categoria(Base):
     # El nombre de la categoría debe ser único
     nombre = Column(String(100), unique=True, index=True)
     # Relación 1:M con Producto
-    productos = relationship("Producto", back_populates="categoria")
+    productos = relationship("Producto", back_populates="categorias")
     #back_populates="categoria" va a hacer referencia al atributo categoria dentro de Productos
 
 class Producto(Base):
@@ -20,7 +20,7 @@ class Producto(Base):
     # Por defecto, el producto tiene stock
     en_stock = Column(Boolean, default=True)
     categoria_id = Column(Integer, ForeignKey("categorias.id"))
-    categoria = relationship("Categoria", back_populates="productos")
+    categorias = relationship("Categoria", back_populates="productos")
 
 class Usuario(Base):
     __tablename__ = "usuarios"

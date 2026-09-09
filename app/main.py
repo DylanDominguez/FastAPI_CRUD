@@ -26,3 +26,13 @@ def eliminar_producto(producto_id: int, db:Session = Depends(obtener_db)):
     if not producto:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
     return {"mensaje": "Producto eliminado"}
+
+
+###### Categoria ######
+@app.post("/categorias", response_model=schemas.CategoriaResponse)
+def crear_categoria(categoria: schemas.CategoriaCreate, db: Session = Depends(obtener_db)):
+    return crud.crear_categoria(db, categoria)
+
+@app.get("/categorias", response_model=list[schemas.CategoriaResponse])
+def listar_categoria(db: Session = Depends(obtener_db)):
+    return crud.obtener_categorias(db)
